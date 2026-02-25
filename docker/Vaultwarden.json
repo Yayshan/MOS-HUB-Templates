@@ -7,7 +7,7 @@
   "privileged": false,
   "extra_parameters": "--restart=unless-stopped --no-healthcheck",
   "web_ui_url": "http://[IP]:[PORT:8000]",
-  "icon": "https://github.com/Yayshan/MOS-HUB-Templates/blob/main/images/vaultwarden.png",
+  "icon": "https://raw.githubusercontent.com/Yayshan/MOS-HUB-Templates/refs/heads/main/images/vaultwarden.png",
   "description": "An alternative server implementation of the Bitwarden Client API, written in Rust and compatible with official Bitwarden clients [disclaimer], perfect for self-hosted deployment where running the official resource-heavy service might not be ideal.",
   "paths": [
     {
