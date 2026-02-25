@@ -1,7 +1,7 @@
 {
   "name": "Vaultwarden",
-  "repo": "docker pull ghcr.io/dani-garcia/vaultwarden:sha256-34b4e91ed4c2a4d2191245325608b2a84bedbeb9c9dd561e3c0924b98ef7126c",
-  "network": "bash",
+  "repo": "docker.io/vaultwarden/server:alpine",
+  "network": "bridge",
   "custom_ip": null,
   "default_shell": "",
   "privileged": false,
