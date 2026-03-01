@@ -1,0 +1,54 @@
+name: paperless-ngx
+
+services:
+  paperless:
+    container_name: paperless_webserver
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: always
+    depends_on:
+      - redis
+      - database
+    ports:
+      - "${PAPERLESS_PORT:-8000}:8000"
+    volumes:
+      - ${DATA_LOCATION}/data:/usr/src/paperless/data
+      - ${MEDIA_LOCATION}:/usr/src/paperless/media
+      - ${EXPORT_LOCATION}:/usr/src/paperless/export
+      - ${CONSUME_LOCATION}:/usr/src/paperless/consume
+    env_file:
+      - .env
+    environment:
+      PAPERLESS_REDIS: redis://redis:6379
+      PAPERLESS_DBENGINE: postgresql
+      PAPERLESS_DBHOST: database
+      PAPERLESS_DBNAME: ${DB_DATABASE_NAME}
+      PAPERLESS_DBUSER: ${DB_USERNAME}
+      PAPERLESS_DBPASS: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  redis:
+    container_name: paperless_redis
+    image: docker.io/valkey/valkey:8
+    restart: always
+    healthcheck:
+      test: redis-cli ping || exit 1
+
+  database:
+    container_name: paperless_postgres
+    image: docker.io/library/postgres:16
+    restart: always
+    volumes:
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${DB_DATABASE_NAME} -U ${DB_USERNAME}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5

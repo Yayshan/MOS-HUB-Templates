@@ -1,0 +1,9 @@
+{
+  "name": "paperless-ngx-compose",
+  "category": "productivity",
+  "description": "Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive. Supports OCR, tagging, full-text search and automatic document classification.",
+  "website": "https://docs.paperless-ngx.com/",
+  "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/paperless-ngx.png",
+  "support": "https://github.com/paperless-ngx/paperless-ngx/issues",
+  "web_ui_url": "http://[ADDRESS]:[PORT:8000]/"
+}
