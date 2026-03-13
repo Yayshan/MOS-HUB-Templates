@@ -37,7 +37,7 @@
     {
       "name": "HTTP",
       "host": "8080",
-      "container": "80",
+      "container": "8080",
       "protocol": "tcp",
       "description": "Circuit Breaker Web Interface — nur im lokalen Netzwerk betreiben (Beta!)",
       "required": true,
