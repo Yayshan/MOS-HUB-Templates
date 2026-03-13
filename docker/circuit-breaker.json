@@ -7,7 +7,7 @@
   "custom_ip": null,
   "default_shell": "sh",
   "privileged": false,
-  "extra_parameters": "--read-only --tmpfs /tmp --security-opt no-new-privileges:true",
+  "extra_parameters": "--security-opt no-new-privileges:true",
   "post_parameters": null,
   "cpu_set": null,
   "web_ui_url": "http://[IP]:[PORT:8080]/",
@@ -27,30 +27,79 @@
   ],
   "ports": [
     {
-      "name": "WebUI",
-      "host": "8080",
-      "container": "8080",
+      "name": "HTTP",
+      "host": "80",
+      "container": "80",
       "protocol": "tcp",
       "description": "Circuit Breaker Web Interface — nur im lokalen Netzwerk betreiben (Beta!)",
       "required": true,
+      "mask": false
+    },
+    {
+      "name": "HTTPS",
+      "host": "443",
+      "container": "443",
+      "protocol": "tcp",
+      "description": "Circuit Breaker HTTPS Interface (optional, nur wenn TLS aktiviert)",
+      "required": false,
       "mask": false
     }
   ],
   "variables": [
     {
-      "name": "Database URL",
-      "key": "DATABASE_URL",
-      "value": "sqlite:////data/app.db",
-      "description": "SQLite database path inside the container. Do not change unless you know what you're doing.",
+      "name": "DB Password",
+      "key": "CB_DB_PASSWORD",
+      "value": "",
+      "description": "Pflichtfeld — Passwort für die interne Datenbank. Zufälligen Wert setzen (z.B. openssl rand -hex 32).",
       "required": true,
+      "mask": true
+    },
+    {
+      "name": "Vault Key",
+      "key": "CB_VAULT_KEY",
+      "value": "",
+      "description": "Pflichtfeld — Verschlüsselungsschlüssel für sensible Daten. Zufälligen Wert setzen (z.B. openssl rand -hex 32).",
+      "required": true,
+      "mask": true
+    },
+    {
+      "name": "NATS Auth Token",
+      "key": "NATS_AUTH_TOKEN",
+      "value": "",
+      "description": "Optionaler Auth-Token für den internen NATS Message Bus. Leer lassen wenn nicht benötigt.",
+      "required": false,
+      "mask": true
+    },
+    {
+      "name": "Image Tag",
+      "key": "CB_TAG",
+      "value": "latest",
+      "description": "Circuit Breaker Image-Tag (z.B. latest oder v0.2.0).",
+      "required": false,
       "mask": false
     },
     {
-      "name": "Uploads Directory",
-      "key": "UPLOADS_DIR",
-      "value": "/data/uploads",
-      "description": "Directory for user-uploaded files inside the container.",
-      "required": true,
+      "name": "HTTP Port",
+      "key": "CB_PORT_HTTP",
+      "value": "8080",
+      "description": "Host-Port für HTTP. Ändern wenn Port 80 bereits belegt ist.",
+      "required": false,
+      "mask": false
+    },
+    {
+      "name": "HTTPS Port",
+      "key": "CB_PORT_HTTPS",
+      "value": "443",
+      "description": "Host-Port für HTTPS. Nur relevant wenn CB_ENABLE_TLS=true.",
+      "required": false,
+      "mask": false
+    },
+    {
+      "name": "Enable TLS",
+      "key": "CB_ENABLE_TLS",
+      "value": "false",
+      "description": "TLS/HTTPS aktivieren. Erfordert gültige Zertifikate im Data-Verzeichnis.",
+      "required": false,
       "mask": false
     }
   ],
