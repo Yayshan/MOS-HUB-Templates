@@ -23,12 +23,20 @@
       "mode": "rw",
       "description": "Persistent storage for database and uploaded files",
       "required": true
+    },
+    {
+      "name": "Docker Socket",
+      "host": "/var/run/docker.sock",
+      "container": "/var/run/docker.sock",
+      "mode": "ro",
+      "description": "Optional - Import Docker Containers from MOS",
+      "required": false
     }
   ],
   "ports": [
     {
       "name": "HTTP",
-      "host": "80",
+      "host": "8080",
       "container": "80",
       "protocol": "tcp",
       "description": "Circuit Breaker Web Interface — nur im lokalen Netzwerk betreiben (Beta!)",
