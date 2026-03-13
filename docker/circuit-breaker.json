@@ -1,6 +1,6 @@
 {
   "name": "Circuit Breaker",
-  "repo": "ghcr.io/blkleg/circuitbreaker",
+  "repo": "ghcr.io/blkleg/circuitbreaker:mono-latest",
   "category": ["homelab", "network", "monitoring"],
   "registry": "https://github.com/BlkLeg/CircuitBreaker/pkgs/container/circuitbreaker",
   "network": "br0",
