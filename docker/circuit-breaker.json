@@ -1,6 +1,6 @@
 {
   "name": "Circuit Breaker",
-  "repo": "ghcr.io/blkleg/circuitbreaker:mono-${CB_TAG:-latest}",
+  "repo": "ghcr.io/blkleg/circuitbreaker:mono-latest",
   "category": ["homelab", "network", "monitoring"],
   "registry": "https://github.com/BlkLeg/CircuitBreaker/pkgs/container/circuitbreaker",
   "network": "br0",
@@ -11,7 +11,7 @@
   "post_parameters": null,
   "cpu_set": null,
   "web_ui_url": "http://[IP]:[PORT:8080]/",
-  "icon": "https://raw.githubusercontent.com/BlkLeg/CircuitBreaker/refs/heads/main/screenshots/cb_night-full.png",
+  "icon": "https://raw.githubusercontent.com/BlkLeg/CircuitBreaker/refs/heads/main/screenshots/cb_night-full.webp",
   "project": "https://blkleg.github.io/CircuitBreaker",
   "support": "https://github.com/BlkLeg/CircuitBreaker/issues",
   "description": "Circuit Breaker is a self-hosted homelab visualization platform that lets you document, map, and understand your infrastructure — hardware, services, networks, and everything in between — through an interactive topology map and rack simulator. Includes embedded Postgres, NATS, Redis, backend workers and nginx in a single mono-container. Features vendor device catalog, telemetry integration (iDRAC, iLO, APC UPS, SNMP), markdown documentation, and rich theming.",
@@ -113,7 +113,7 @@
     {
       "name": "Data Directory",
       "key": "CB_DATA_DIR",
-      "value": "./circuitbreaker-data",
+      "value": "/mnt/cache/appdata/circuit-breaker",
       "description": "Host-Pfad für persistente Daten.",
       "required": false,
       "mask": false
